@@ -3,26 +3,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.http import HttpResponse
-from apps.settings.models import PageView, Post
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import ListView, CreateView
 from django.views.generic import TemplateView
 
 from apps.telegram.models import Telegram
-from apps.telegram.views import get_text, admin_id, bot
+from apps.telegram.views import admin_id, bot
 
 
 class IndexView(TemplateView):
     template_name = 'base/index.html'
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'post_list.html'
-
-class PostCreateView(CreateView):
-    model = Post
-    template_name = 'post_create.html'
-    fields = ['title', 'content']
 
 class LoginView(View):
     def get(self, request):
