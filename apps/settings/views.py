@@ -5,13 +5,17 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
-
 from apps.telegram.models import Telegram
 from apps.telegram.views import admin_id, bot
-
+from apps.settings.models import Settings
 
 class IndexView(TemplateView):
     template_name = 'base/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['settings'] = Settings.objects.latest('id')
+        return context
 
 
 class LoginView(View):
