@@ -86,12 +86,7 @@
             <h2>Связаться с нами</h2>
             <form method="post" action="/contact/">
                 {% csrf_token %}
-                <label for="name">Ваше имя:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Ваш Email:</label>
-                <input type="text" id="email" name="email" required>
-                <label for="message">Сообщение:</label>
-                <textarea id="message" name="message" required></textarea>
+                {{ form.as_p }}
                 <input type="submit" value="Отправить">
             </form>
         </div>

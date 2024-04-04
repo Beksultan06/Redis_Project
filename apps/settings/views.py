@@ -5,6 +5,7 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
+from apps.settings.forms import TelegramForm
 from apps.telegram.models import Telegram
 from apps.telegram.views import admin_id, bot
 from apps.settings.models import Settings
@@ -57,16 +58,16 @@ class ContactView(TemplateView):
     template_name = 'base/contact.html'
 
     def post(self, request, *args, **kwargs):
-        if request.method == "POST":
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            message = request.POST.get('message')
-
-            if message:
-                Telegram.objects.create(name=name, email=email, message=message)
+        form = TelegramForm(request.POST)
+        if form.is_valid():
+            form.save()
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
             bot.send_message(admin_id, f"Оставлен отзыв\nИмя пользователя: {name}\nНомер телефона: {email}\nСообщение: {message}")
-
             return redirect('index')
+        return render(request, self.template_name, {'form': form})
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+        form = TelegramForm()
+        return render(request, self.template_name, {'form': form})
