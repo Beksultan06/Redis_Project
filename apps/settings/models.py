@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Settings(models.Model):
@@ -20,3 +21,18 @@ class Settings(models.Model):
 
     class Meta:
         verbose_name_plural = 'настройка'
+
+class About(models.Model):
+    title = models.CharField(
+        max_length=155,
+        verbose_name='Заголовка'
+    )
+    descriptions = RichTextField(
+        verbose_name='Описание'
+    )
+
+    def __Str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = 'О нас'

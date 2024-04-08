@@ -6,9 +6,8 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from apps.settings.forms import TelegramForm
-from apps.telegram.models import Telegram
 from apps.telegram.views import admin_id, bot
-from apps.settings.models import Settings
+from apps.settings.models import Settings, About
 
 class IndexView(TemplateView):
     template_name = 'base/index.html'
@@ -18,6 +17,13 @@ class IndexView(TemplateView):
         context['settings'] = Settings.objects.latest('id')
         return context
 
+class AboutView(TemplateView):
+    model = About
+    template_name = 'base/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['about'] = About.objects.latest('id')
 
 class LoginView(View):
     def get(self, request):
@@ -71,3 +77,5 @@ class ContactView(TemplateView):
     def get(self, request, *args, **kwargs):
         form = TelegramForm()
         return render(request, self.template_name, {'form': form})
+
+

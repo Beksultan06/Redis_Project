@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django.contrib.sites',
 
+    'ckeditor',
+
     'apps.settings',
     'apps.telegram',
 ]
@@ -96,6 +98,7 @@ SITE_ID = 1
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# redis
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -110,7 +113,7 @@ CACHES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 
-
+# jazzmin
 JAZZMIN_SETTINGS = {
     "site_title": "REDIS",  # Заголовок сайта
     "site_header": "REDIS",  # Заголовок на экране входа
@@ -153,3 +156,15 @@ REDIS_HOST = 'localhost'  # Используйте localhost вместо redis
 # celery
 CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Используйте localhost вместо redis
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Используйте localhost вместо redis
+
+# ckeditor
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'  # URL to jQuery
+CKEDITOR_IMAGE_BACKEND = "pillow"  # Путь к пакету Pillow для обработки изображений
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',  # Вы можете настроить свою собственную панель инструментов CKEditor
+        'height': 300,
+        'width': 800,
+    },
+}

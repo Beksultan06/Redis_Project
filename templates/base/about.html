@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        about p{
+            text-align: center;
+            caret-color: black;
+        }
+        about h1{
+            text-align-all: center;
+            color: blue;
+        }
+
+    </style>
+</head>
+
+<body>
+{% include 'include/header.html' %}
+    <div class="about">
+        <a href="{% url 'about' %}" ><p>О нас</p></a>
+        <h1>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+            Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+            В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,
+            используя Lorem Ipsum для распечатки образцов.
+            Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн.
+            Его популяризации в новое время послужили публикация листов Letraset с образцами
+            Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker,
+            в шаблонах которых используется Lorem Ipsum.</h1>
+    </div>
+{% include 'include/footer.html' %}
+</body>
+</html>
