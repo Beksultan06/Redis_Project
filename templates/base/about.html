@@ -29,9 +29,9 @@
 <body>
 {% include 'include/header.html' %}
     <div class="about">
-        <a href="{% url 'index' %}" ><h1 class="tittle">{{ context.title }}</h1></a>
-        <h1>{{ context.descriptions }}</h1>
+        <a href="{% url 'index' %}" ><h1 class="tittle">{{ about.title }}</h1></a>
+        <h1>{{ about.descriptions }}</h1>
     </div>
 {% include 'include/footer.html' %}
 </body>
-</html>
+</html>     

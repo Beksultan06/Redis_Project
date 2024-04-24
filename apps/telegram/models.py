@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Telegram(models.Model):
@@ -20,8 +21,7 @@ class Telegram(models.Model):
         max_length = 155,
         verbose_name = 'Почта'
     )
-    message = models.CharField(
-        max_length = 155,
+    message = RichTextField(
         verbose_name = 'Сообщение'
     )
     chat_id = models.CharField(

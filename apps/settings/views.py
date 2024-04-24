@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 from apps.settings.forms import TelegramForm
 from apps.telegram.views import admin_id, bot
 from apps.settings.models import Settings, About
+from django.core.cache import cache
+import pickle
 
 class IndexView(TemplateView):
     template_name = 'base/index.html'
@@ -64,17 +66,30 @@ class ContactView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = TelegramForm(request.POST)
+
         if form.is_valid():
             form.save()
             name = form.cleaned_data.get('name')
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
             bot.send_message(admin_id, f"Оставлен отзыв\nИмя пользователя: {name}\nНомер телефона: {email}\nСообщение: {message}")
+
+            try:
+                # Попытка сохранить форму в кэше Redis
+                cache.set(f"contact_form_{request.user.id}", form, timeout=3600)  # Сохраняем на 1 час
+            except pickle.PicklingError as e:
+                # Обработка ошибки PicklingError
+                print(f"Ошибка сериализации данных: {e}")
+
             return redirect('index')
         return render(request, self.template_name, {'form': form})
 
     def get(self, request, *args, **kwargs):
-        form = TelegramForm()
+        # Проверяем, есть ли кэшированная форма для текущего пользователя
+        cached_form = cache.get(f"contact_form_{request.user.id}")
+        if cached_form:
+            form = cached_form
+        else:
+            form = TelegramForm()
         return render(request, self.template_name, {'form': form})
-
 

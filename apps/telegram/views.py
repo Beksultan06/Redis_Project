@@ -15,7 +15,6 @@ def start(message: types.Message):
     Telegram.objects.get_or_create(username=message.from_user.username, id_user=message.from_user.id)
     bot.send_message(message.chat.id, f"Привет {message.from_user.first_name}")
 
-
 class Mail:
     def __init__(self): 
         self.description = None
@@ -49,3 +48,11 @@ def get_text_doctor(message, id):
 def echo(message:types.Message):
     # bot.delete_message(message.chat.id, message.message_id)  
     bot.send_message(message.chat.id, "Я вас не понял")
+
+def get_message(message: types.Message):
+    mail.description = message.text 
+    users = Telegram.objects.all()
+    for user in users:
+        bot.send_message(user.id_user, mail.description)
+    bot.send_message(message.chat.id, "Рассылка окончена")
+
