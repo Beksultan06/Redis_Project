@@ -32,11 +32,17 @@
     <br/>
     <nav>
         <ul>
-            <li><a class="register" href="{% url 'register' %}">Регистрация</a></li>
-            <li><a class="login" href="{% url 'login' %}">Авторизация</a></li>
-             <li><a class="about" href="{% url 'about' %}">О нас</a></li>
-            <li><a class="contact" href="{% url 'contact' %}">Контакты</a></li>
+            <li><a href="{% url 'index' %}">Главная страница</a></li>
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+            <li><a href="{% url 'login' %}">Авторизация</a></li>
+            <li><a href="{% url 'product' %}">Наши продукты</a></li>
+            <li><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>
     </nav>
+    
+    <!-- <form action="{% url 'product' %}" method="GET">
+        <input type="text" name="q" placeholder="Поиск...">
+        <button type="submit">Найти</button>
+    </form> -->
 </header>
 <!-- конец header -->

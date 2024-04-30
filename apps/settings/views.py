@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from apps.settings.forms import TelegramForm
 from apps.telegram.views import admin_id, bot
-from apps.settings.models import Settings, About
+from apps.settings.models import Settings
 from django.core.cache import cache
 import pickle
 
@@ -18,14 +18,7 @@ class IndexView(TemplateView):
         context['settings'] = Settings.objects.latest('id')
         return context
 
-class AboutView(TemplateView):
-    model = About
-    template_name = 'base/about.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['about'] = About.objects.latest('id')
-
+ 
 class LoginView(View):
     def get(self, request):
         return render(request, 'auth/login.html')
@@ -64,7 +57,7 @@ class RegisterView(View):
 class ContactView(TemplateView):
     template_name = 'base/contact.html'
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = TelegramForm(request.POST)
 
         if form.is_valid():
@@ -92,4 +85,3 @@ class ContactView(TemplateView):
         else:
             form = TelegramForm()
         return render(request, self.template_name, {'form': form})
-
