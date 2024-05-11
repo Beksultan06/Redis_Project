@@ -70,28 +70,107 @@
             font-size: 18px;
             /* Увеличение размера текста */
         }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+        }
+        .btn{
+            width: 600px;
+            height: 50px;
+            margin-top: 10px;
+            background-color: green;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Список продуктов</h1>
+    <h1 style="text-align: center;">Список продуктов</h1>
     {% if products %}
-    <ul>
+    <ul style="margin-bottom: 40px;">
         {% for product in products %}
         <li>
-            <h2>{{ product.title }}</h2>
-            <p>{{ product.description }}</p>
-            <img src="{{ product.image.url }}" alt="" style="height: 300px;">
-            <a href="{% url 'product_detail' product.id %}">
-                <button>Детально</button>
-            </a>
+            <div style="display: flex; align-items: center;">
+                <img src="{{ product.image.url }}" alt="" style="height: 300px; margin-right: 20px;">
+                <div>
+                    <h2>{{ product.title }}</h2>
+                    <p>{{ product.description }}</p>
+                    <a href="{% url 'product_detail' product.id %}">
+                        <button>Детально</button>
+                    </a>
+                </div>
+            </div>
         </li>
         {% endfor %}
     </ul>
     {% else %}
     <p class="no-products">Продукты не найдены.</p>
     {% endif %}
-</body>
 
+    <!-- Пагинация -->
+    <div class="pagination" style="text-align: center;">
+        {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+        {% if page_obj.number == num %}
+        <span>{{ num }}</span>
+        {% else %}
+        <a style="background: url('../../static/icon/icon.svg');" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        {% endif %}
+        {% else %}
+        <p class="no-products">Продукты не найдены.</p>
+        {% endif %}
+    </div>
+
+    {% if products %}
+    {% else %}
+    <p class="no-products">Продукты не найдены.</p>
+    {% endif %}
+    <br>
+
+    <h2 style="text-align: center; margin-top: 30px;">Отзыв Товаров</h2>
+
+    <form action="{% url 'contact' %}" method="post" style="text-align: center;">
+        {% csrf_token %}
+        <label for="name">Имя:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Сообщение:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button class="btn" type="submit">Отправить</button>
+    </form>
+</body>
 
 </html>

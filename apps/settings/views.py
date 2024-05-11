@@ -4,7 +4,7 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
-from apps.settings.forms import TelegramForm
+from apps.telegram.forms import TelegramForm
 from apps.telegram.views import admin_id, bot
 from apps.settings.models import Settings
 from django.core.cache import cache
