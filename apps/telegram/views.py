@@ -4,7 +4,7 @@ from telebot import TeleBot, types
 from .models import Telegram
 
 # Create your views here.
-TELEGRAM_TOKEN = "6732276189:AAF_ZMJNM0FFRK3TQYgSAF3NdCdHJw-EsbE"
+TELEGRAM_TOKEN = "6573964275:AAFQYZ_JqNA9ND4hGhYNX4fvutv1D-sE-RA"
 ADMIN_ID = 5771196980
 
 bot = TeleBot(TELEGRAM_TOKEN, threaded=False)
@@ -16,14 +16,13 @@ def start(message: types.Message):
     bot.send_message(message.chat.id, f"Привет {message.from_user.first_name}")
 
 class Mail:
-    def __init__(self): 
+    def __init__(self):
         self.description = None
 
 mail = Mail()
 
-
 def get_message(message:types.Message):
-    mail.description = message.text 
+    mail.description = message.text
     users = Telegram.objects.all()
     for user in users:
         bot.send_message(user.id_user, mail.description)

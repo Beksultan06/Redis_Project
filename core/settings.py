@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'apps.settings',
     'apps.telegram',
     'apps.product',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
