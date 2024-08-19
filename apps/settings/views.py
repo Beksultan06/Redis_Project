@@ -1,8 +1,4 @@
-from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.views.generic import View
-from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from apps.telegram.forms import TelegramForm
 from apps.telegram.views import admin_id, bot

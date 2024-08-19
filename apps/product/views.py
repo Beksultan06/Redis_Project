@@ -5,12 +5,11 @@ from .models import Product, ProductDetail, Send_Email
 from django.core.paginator import Paginator
 from apps.product.utils import send_contact_email
 
-
 class ProductListView(ListView):
     model = Product, Send_Email
     template_name = 'product/product.html'
     context_object_name = 'products'
-    paginate_by = 3  # Укажите количество продуктов на странице
+    paginate_by = 3
 
     def get_queryset(self):
         return Product.objects.all().order_by('-created')
@@ -37,13 +36,10 @@ class ProductListView(ListView):
 
         return redirect('index')
 
-
-
 class ProductDetailView(View):
     model = ProductDetail
-    template_name = 'product/product_detail.html'  # Шаблон для детального просмотра продукта
+    template_name = 'product/product_detail.html'
 
     def get(self, request, product_id):
-        # Получаем объект продукта по его ID или возвращаем 404, если продукт не найден
         product = get_object_or_404(Product, pk=product_id)
         return render(request, self.template_name, {'product': product})

@@ -78,7 +78,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -140,7 +140,7 @@ JAZZMIN_UI_TWEAKS = {
     # белый фон:
     # "theme": "flatly",
     # "theme" : "simplex",  # белый фон с цветами - RGB
-    # "theme": "sketchy",  #  мультяшный
+    # "theme": "sketchy",
 
     # темный фон:
     # "theme": "darkly",
@@ -170,22 +170,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
-# Подключение к Redis для кэширования
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',  # Адрес Redis
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-# Если вы хотите использовать Redis для сессий
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
-
 # SMTP
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
@@ -193,3 +177,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'nurlanuuulubeksultan@gmail.com'
 EMAIL_HOST_PASSWORD = 'ytlhynvmpifetqdk'
+
+AUTH_USER_MODEL = 'users.CustomUser'

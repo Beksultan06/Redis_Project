@@ -1,31 +1,37 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
+
 <body>
 
     {% include 'include/header.html' %}
 
-    <main>
-        <p>{{ settings.title }}</p>
-        <p>{{ settings.descriptions }}</p>
-    </main>
-    <div class="image">
-        <div class="main3">
-            <img src="{{ settings.image.url }}" alt="" style="max-width: 10%; max-height: 10%;">
+    <div class="container">
+        <main>
+            <p>{{ settings.title }}</p>
+            <p>{{ settings.descriptions }}</p>
+        </main>
+        <div class="image-container">
+            <img class="index-image" src="{{ settings.image.url }}" alt="">
+            <div class="box">
+                <h1 class="title-image" style="text-align: center;"> Заголовка Фотографий </h1>
+                <p class="descriptions-image">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat saepe
+                    quis at veniam nisi adipisci iure doloremque labore recusandae maxime tempore aliquid voluptatem
+                    pariatur, corrupti reprehenderit sint consequuntur, natus vero.</p>
+            </div>
         </div>
     </div>
+
     {% include 'include/footer.html' %}
 
 </body>
+
 </html>

@@ -22,9 +22,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),  # URL для аутентификации
-    path('', include('apps.settings.urls')),  # URL для нашего приложения счетчика
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('apps.settings.urls')),
     path('', include('apps.product.urls')),
+    path('', include('apps.users.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
