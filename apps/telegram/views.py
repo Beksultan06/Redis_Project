@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.conf import settings
 from telebot import TeleBot, types
 from .models import Telegram
 

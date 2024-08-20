@@ -7,6 +7,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 NAME = os.getenv('DB_NAME')
 USER = os.getenv('DB_USER')
-PASSWORD = os.getenv('DB_PASS')  # Изменено с PASS на PASSWORD
+PASSWORD = os.getenv('DB_PASS')
 PORT = os.getenv('DB_PORT')
 HOST = os.getenv('DB_HOST')

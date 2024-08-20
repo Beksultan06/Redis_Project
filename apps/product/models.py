@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-
 class Product(models.Model):
     title = models.CharField(
         max_length=100, 
@@ -39,26 +38,6 @@ class ProductDetail(models.Model):
 
     class MEta:
         verbose_name_plural = 'Детально продукты'
-
-class Review(models.Model):
-    last_name = models.CharField(
-        max_length=155,
-        verbose_name='имя'
-    )
-    email = models.EmailField(
-        verbose_name='Электронная почта'
-    )
-    message = models.CharField(
-        max_length=355,
-        verbose_name='Сообщение'
-    )
-
-    def __str__(self) -> str:
-        return self.last_name
-    
-    class Meta: 
-        verbose_name_plural = 'Отзывы'
-
 
 class Send_Email(models.Model):
     name = models.CharField(
