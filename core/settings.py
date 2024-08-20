@@ -1,8 +1,9 @@
 from pathlib import Path
+from config import SECRET_KEY, NAME, USER, PASSWORD, HOST, PORT
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-yr1=x6ty#2pxhy11*mhp+b)n65y%gnpte*b)*iqone1&guf*t!"
+SECRET_KEY = SECRET_KEY
 
 DEBUG = True
 
@@ -58,8 +59,12 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": NAME,
+        "USER": USER,
+        "PASSWORD": PASSWORD,  # Изменено с PASS на PASSWORD
+        "HOST": HOST,
+        "PORT": PORT,
     }
 }
 

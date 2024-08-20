@@ -1,0 +1,12 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+NAME = os.getenv('DB_NAME')
+USER = os.getenv('DB_USER')
+PASSWORD = os.getenv('DB_PASS')  # Изменено с PASS на PASSWORD
+PORT = os.getenv('DB_PORT')
+HOST = os.getenv('DB_HOST')
